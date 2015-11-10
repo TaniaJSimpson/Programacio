@@ -1,25 +1,54 @@
-package NovaPeixera;
+package UnaNovaPeixera;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 import acm.graphics.GImage;
+import acm.graphics.GRectangle;
 import acm.program.GraphicsProgram;
 
-public class App extends GraphicsProgram {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private static final int MIDAPEIXERA=600;
 
+public class App extends GraphicsProgram{
+	
+
+	public static final int MIDAPANTALLA = 600;
+	
 	public void run(){
-		Peixera peixera= new Peixera();
 		
-		for(int i=0; i<10; i++){
-			GImage imatge= new GImage("peix1.png");
-			add(imatge);
+		GRectangle pantalla = new GRectangle(0, 0, MIDAPANTALLA, MIDAPANTALLA); 
+				
+		ArrayList<ElsPeixicos> Peixos = new ArrayList<ElsPeixicos>(); 
+		
+		for(int i=0; i<10 ;i++){
+			generaPeixos();
 		}
 		
 		
 	}
-
+	
+private void generaPeixos(){
+		
+		Random aleatori = new Random();
+		boolean[] sexes = {true, false};
+		boolean sexe = sexes[aleatori.nextInt(sexes.length)];
+		GImage Ipeixa = new GImage("peixa.png");
+		GImage Ipeix = new GImage("peix.png");
+		
+		if(sexe==true){
+			add(Ipeix);
+		}else{
+			add(Ipeixa);
+		}
+		
+		ElsPeixicos peix = new ElsPeixicos(
+				Ipeix,
+				aleatori.nextInt((int)(MIDAPANTALLA-Ipeix.getWidth())),
+				aleatori.nextInt((int)(MIDAPANTALLA-Ipeix.getHeight())),
+				sexe
+				);
+		
+	}
+	
+	
+	
 }
