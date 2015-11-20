@@ -5,6 +5,7 @@ import acm.graphics.GRectangle;
 
 public class Peix {
 
+	public static final int MIDAPANTALLA = 600;
 	private static final int VELOCITATPEIX = 6;
 
 	GImage imatge;
@@ -19,45 +20,44 @@ public class Peix {
 		imatge.setLocation(x, y);
 	}
 
-		// Retorna la posició
+	// Retorna la posició
 	public GRectangle getPosicio() {
 		return imatge.getBounds();
 	}
 
-		//Assignar el moviment (direcció-velocitat) del peix
+	// Assignar el moviment (direcció-velocitat) del peix
 	public void mou() {
 		imatge.move(Dx * VELOCITATPEIX, Dy * VELOCITATPEIX);
 
 	}
 
-}
-
-
-/*
- * package Peixicos;
-
-import acm.graphics.GImage;
-import acm.graphics.GRectangle;
-
-public class ElsPeixicos {
-	
-	GImage imagen;
-	GRectangle rectangle;
-	public static final int MUEVEN = 20;
-	boolean esMascle;
-	
-	
-	public ElsPeixicos(GImage imatge, int x, int y, boolean sexe){
-		imagen = imatge;
-		imagen.setLocation(x, y);
-		esMascle = sexe;
+	public void reset() {
+		if (imatge.getX() > MIDAPANTALLA) {
+			imatge.setLocation(0, imatge.getY());
+		} else if (imatge.getX() < 0) {
+			imatge.setLocation(MIDAPANTALLA, imatge.getY());
+		} else if (imatge.getY() > MIDAPANTALLA) {
+			imatge.setLocation(imatge.getX(), 0);
+		} else if (imatge.getY() < 0) {
+			imatge.setLocation(imatge.getX(), MIDAPANTALLA);
+		}
 	}
-	
-	public void mou(int x, int y) {
-	    imagen.move(x , y);
-	}
-	
-	
+
+	// Girar el peix
+	/*private void flipHorizontal() {
+		int[][] array = imatge.getPixelArray();
+		int height = array.length;
+		int width = array[0].length;
+
+		for (int y = 0; y < height; y++) {
+			for (int x1 = 0; x1 < width / 2; x1++) {
+				int x2 = width - x1 - 1;
+				int temp = array[y][x1];
+				array[y][x1] = array[y][x2];
+				array[y][x2] = temp;
+			}
+		}
+		imatge.setImage(new GImage(array).getImage());
+	}*/
+
 }
- * */
- 
